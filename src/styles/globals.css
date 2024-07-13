@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .loader {
+    width: 50px;
+    padding: 8px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+
+    --_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+    -webkit-mask: var(--_m);
+    mask: var(--_m);
+    -webkit-mask-composite: source-out;
+    mask-composite: subtract;
+    animation: l3 1s infinite linear;
+    @apply bg-indigo-700;
+  }
+
+  @keyframes l3 {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+
+  /* HTML: <div class="loader"></div> */
+  .loader-mini {
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(farthest-side, #fff 30%, #0000) top/2px 2px
+        no-repeat,
+      conic-gradient(#0000 30%, #fff);
+    -webkit-mask: radial-gradient(farthest-side, #0000 calc(8px), #000 0);
+    animation: l13 1s infinite linear;
+  }
+  @keyframes l13 {
+    100% {
+      transform: rotate(1turn);
+    }
+  }
+}
