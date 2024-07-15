@@ -1,3 +1,4 @@
+import { AdminProvider } from "@/context/AdminProvider";
 import "@/styles/globals.css";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
@@ -18,11 +19,13 @@ export const queryClient = new QueryClient({
 export default function App({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <main className={`${inter.variable} font-sans`}>
-        <Component {...pageProps} />
-      </main>
-      <ReactQueryDevtools />
-      <Toaster toastOptions={{ duration: 4000 }} />
+      <AdminProvider>
+        <main className={`${inter.variable} font-sans`}>
+          <Component {...pageProps} />
+        </main>
+        <ReactQueryDevtools />
+        <Toaster toastOptions={{ duration: 4000 }} />
+      </AdminProvider>
     </QueryClientProvider>
   );
 }

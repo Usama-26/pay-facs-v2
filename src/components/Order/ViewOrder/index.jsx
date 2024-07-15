@@ -46,9 +46,9 @@ export default function ViewOrder({ isOpen, setIsOpen }) {
         <div className="p-6">
           <SimpleTable headers={["Product Name", "Quantity"]}>
             {items.map((item, Idx) => (
-              <tr key={item.id} className="border-b">
+              <tr key={Idx} className="border-b">
                 <td className="whitespace-nowrap p-2 font-medium">{Idx + 1}</td>
-                <td className="whitespace-nowrap p-2">{item.product.name}</td>
+                <td className="whitespace-nowrap p-2">{item.name}</td>
                 <td className="whitespace-nowrap p-2">{item.quantity}</td>
               </tr>
             ))}

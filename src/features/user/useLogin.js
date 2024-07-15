@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 
 export default function useLogin() {
   const router = useRouter();
+
   const {
     mutate: loginUser,
     isLoading: isLoggingIn,
@@ -12,7 +13,9 @@ export default function useLogin() {
   } = useMutation({
     mutationFn: login,
     onSuccess: (data) => {
+      const isAdmin = data.data.role === "admin";
       localStorage.setItem("token", data.token);
+      localStorage.setItem("admin", isAdmin);
       router.replace("/app");
     },
     onError: (error) => toast.error(error.message),

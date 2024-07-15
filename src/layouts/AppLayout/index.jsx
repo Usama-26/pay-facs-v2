@@ -17,6 +17,7 @@ export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [navigation, setNavigation] = useState(sidebarNavigation);
   const router = useRouter();
+  const [client, setClient] = useState(false);
 
   useEffect(() => {
     const updatedNavigation = sidebarNavigation.map((navItem) => ({
@@ -25,6 +26,17 @@ export default function AppLayout({ children }) {
     }));
     setNavigation(updatedNavigation);
   }, [router]);
+
+  useEffect(() => {
+    const validNavigation = localStorage.getItem("admin")
+      ? sidebarNavigation.filter((navItem) => navItem.href !== "users")
+      : sidebarNavigation;
+
+    setNavigation(validNavigation);
+    setClient(true);
+  }, []);
+
+  if (!client) return null;
 
   return (
     <>
