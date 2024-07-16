@@ -20,7 +20,14 @@ export default function AppLayout({ children }) {
   const [client, setClient] = useState(false);
 
   useEffect(() => {
-    const updatedNavigation = sidebarNavigation.map((navItem) => ({
+    const isAdmin = localStorage.getItem("admin");
+
+    const validNavigation =
+      isAdmin === "true"
+        ? sidebarNavigation
+        : sidebarNavigation.filter((navItem) => navItem.href !== "users");
+
+    const updatedNavigation = validNavigation.map((navItem) => ({
       ...navItem,
       current: router.pathname.includes(navItem.href),
     }));
@@ -28,11 +35,6 @@ export default function AppLayout({ children }) {
   }, [router]);
 
   useEffect(() => {
-    const validNavigation = localStorage.getItem("admin")
-      ? sidebarNavigation.filter((navItem) => navItem.href !== "users")
-      : sidebarNavigation;
-
-    setNavigation(validNavigation);
     setClient(true);
   }, []);
 

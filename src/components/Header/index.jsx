@@ -14,6 +14,7 @@ export default function Header({ userNavigation, setSidebarOpen }) {
   const logout = () => {
     const { replace } = router;
     localStorage.removeItem("token");
+    localStorage.removeItem("admin");
     replace("/auth/login");
   };
 
